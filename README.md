@@ -20,7 +20,7 @@
 
 ## 👨‍💻 Geliştirici & Tasarım
 **Geliştirici & Tasarım:** **Kemal ŞİMŞEK**  
-*İngilizce Dil & Sınav Uzmanı | Yazılım & UX/UI Mimarı*
+*Bilgisayar Mühendisi | Yazılım & UX/UI Mimarı*
 
 ---
 
