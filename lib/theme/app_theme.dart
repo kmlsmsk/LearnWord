@@ -42,12 +42,16 @@ class AppTheme {
       ),
     ),
     chipTheme: ChipThemeData(
-      backgroundColor: lightYellow,
-      selectedColor: accentYellow,
+      backgroundColor: const Color(0xFFF1F5F9), // Slate 100
+      selectedColor: primaryPurple,
+      disabledColor: const Color(0xFFE2E8F0),
+      labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Color(0xFF1E293B)),
+      secondaryLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Color(0xFFCBD5E1), width: 1),
       ),
-      labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
     ),
   );
 
@@ -79,6 +83,16 @@ class AppTheme {
       shadowColor: Colors.black.withValues(alpha: 0.3),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
+      ),
+    ),
+    chipTheme: ChipThemeData(
+      backgroundColor: const Color(0xFF334155),
+      selectedColor: secondaryPurple,
+      labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 12, color: Colors.white),
+      secondaryLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.white),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: const BorderSide(color: Color(0xFF475569), width: 1),
       ),
     ),
   );

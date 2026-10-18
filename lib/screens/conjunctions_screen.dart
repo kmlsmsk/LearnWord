@@ -171,9 +171,17 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> with SingleTick
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ActionChip(
-                      avatar: const Icon(Icons.view_list_rounded, size: 16, color: Color(0xFF0D9488)),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.view_list_rounded, size: 16),
                       label: const Text('Listeye Dön', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0D9488),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      ),
                       onPressed: () {
                         setState(() {
                           _isFlashcardMode = false;
@@ -416,12 +424,19 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> with SingleTick
                   cat,
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    color: isSelected ? Colors.white : null,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                    color: isSelected ? Colors.white : const Color(0xFF1E293B),
                   ),
                 ),
                 selected: isSelected,
                 selectedColor: const Color(0xFF0D9488),
+                backgroundColor: const Color(0xFFF1F5F9),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(
+                    color: isSelected ? const Color(0xFF0D9488) : const Color(0xFFCBD5E1),
+                  ),
+                ),
                 onSelected: (selected) {
                   if (selected) {
                     setState(() {
@@ -776,10 +791,21 @@ class _ConjunctionsScreenState extends State<ConjunctionsScreen> with SingleTick
                   spacing: 6,
                   runSpacing: 4,
                   children: conj.synonyms.map((s) {
-                    return Chip(
-                      label: Text(s, style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
-                      padding: EdgeInsets.zero,
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFE0F2FE),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: const Color(0xFFBAE6FD)),
+                      ),
+                      child: Text(
+                        s,
+                        style: const TextStyle(
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF0369A1),
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),

@@ -169,9 +169,17 @@ class _GrammarScreenState extends State<GrammarScreen> with SingleTickerProvider
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ActionChip(
-                      avatar: const Icon(Icons.view_list_rounded, size: 16, color: Color(0xFF1E3A8A)),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.view_list_rounded, size: 16),
                       label: const Text('Listeye Dön', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF1E3A8A),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        minimumSize: Size.zero,
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      ),
                       onPressed: () {
                         setState(() {
                           _isFlashcardMode = false;
@@ -418,12 +426,19 @@ class _GrammarScreenState extends State<GrammarScreen> with SingleTickerProvider
                   cat,
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                    color: isSelected ? Colors.white : null,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                    color: isSelected ? Colors.white : const Color(0xFF1E293B),
                   ),
                 ),
                 selected: isSelected,
                 selectedColor: const Color(0xFF1E3A8A),
+                backgroundColor: const Color(0xFFF1F5F9),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  side: BorderSide(
+                    color: isSelected ? const Color(0xFF1E3A8A) : const Color(0xFFCBD5E1),
+                  ),
+                ),
                 onSelected: (selected) {
                   if (selected) {
                     setState(() {
