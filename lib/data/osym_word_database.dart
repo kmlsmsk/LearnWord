@@ -54,7 +54,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['mitigate the effects/impacts of', 'mitigate the risk', 'mitigation strategy'],
-      examTip: 'ÖSYM sorularında sıklıkla "alleviate", "lessen" veya "ease" kelimeleriyle doğru seçenek eşleştirmesi yapılır.',
+      examTip: 'Sınav sorularında sıklıkla "alleviate", "lessen" veya "ease" kelimeleriyle doğru seçenek eşleştirmesi yapılır.',
     ),
 
     Word(
@@ -172,7 +172,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['exacerbate the crisis/problem/symptoms', 'acute exacerbation'],
-      examTip: 'ÖSYM "mitigate" (hafifletmek) kelimesinin zıt anlamlısı (antonym) olarak bu kelimeyi çok sever.',
+      examTip: 'Dil Sınavı "mitigate" (hafifletmek) kelimesinin zıt anlamlısı (antonym) olarak bu kelimeyi çok sever.',
     ),
 
     Word(
@@ -384,7 +384,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['unprecedented growth/crisis/scale', 'at an unprecedented rate'],
-      examTip: 'ÖSYM okuma parçalarında "unparalleled" ve "unique" sözcükleriyle yeniden ifade edilir.',
+      examTip: 'Dil Sınavı okuma parçalarında "unparalleled" ve "unique" sözcükleriyle yeniden ifade edilir.',
     ),
 
     Word(
@@ -505,7 +505,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['income/wealth disparity', 'disparity between', 'wide disparity'],
-      examTip: 'ÖSYM sınavlarında "gap" veya "inequality" kelimelerinin akademik metinlerdeki tam karşılığıdır.',
+      examTip: 'Dil sınavlarında "gap" veya "inequality" kelimelerinin akademik metinlerdeki tam karşılığıdır.',
     ),
 
     Word(
@@ -629,7 +629,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['adversely affect/impact', 'adverse reaction', 'in the face of adversity'],
-      examTip: 'ÖSYM soru kalıbı: "adversely affect" (olumsuz etkilemek). Neredeyse her yıl en az bir soruda test edilir!',
+      examTip: 'Dil Sınavı soru kalıbı: "adversely affect" (olumsuz etkilemek). Neredeyse her yıl en az bir soruda test edilir!',
     ),
 
     Word(
@@ -690,7 +690,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['inevitably lead to', 'inevitably result in'],
-      examTip: '"inevitably lead to" kalıbı sonuç cümlelerinde ÖSYM paragraf ve cümle tamamlama sorularının anahtarıdır.',
+      examTip: '"inevitably lead to" kalıbı sonuç cümlelerinde Dil Sınavı paragraf ve cümle tamamlama sorularının anahtarıdır.',
     ),
 
     // ---------------- PHRASAL VERBS (DEYİMSEL FİİLLER) ----------------
@@ -721,7 +721,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['stem from childhood', 'problems stem from', 'stem cell research'],
-      examTip: 'Sebep-sonuç ilişkisinde "stem from" = kaynaklanmak (sebep arkadan gelir). "result in" = sebep olmak (sonuç arkadan gelir). Bu fark ÖSYM’de hayat kurtarır!',
+      examTip: 'Sebep-sonuç ilişkisinde "stem from" = kaynaklanmak (sebep arkadan gelir). "result in" = sebep olmak (sonuç arkadan gelir). Bu fark Dil Sınavı’de hayat kurtarır!',
     ),
 
     Word(
@@ -869,7 +869,7 @@ class OsymWordDatabase {
         ),
       ],
       collocations: ['coherent strategy', 'coherent explanation', 'lack of coherence'],
-      examTip: 'ÖSYM İngilizce paragraf bütünlüğünü bozan cümleyi bulma sorularında "lack of coherence" (tutarlılık eksikliği) esastır.',
+      examTip: 'Dil Sınavı İngilizce paragraf bütünlüğünü bozan cümleyi bulma sorularında "lack of coherence" (tutarlılık eksikliği) esastır.',
     ),
 
     Word(

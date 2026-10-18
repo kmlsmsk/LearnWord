@@ -5,7 +5,7 @@ class OsymReadingPassages {
     ReadingPassage(
       id: 'passage_health_1',
       title: 'The Gut-Brain Axis and Cognitive Well-Being',
-      category: 'ÖSYM Sağlık Bilimleri',
+      category: 'Dil Sınavı Sağlık Bilimleri',
       content:
           'Recent clinical investigations have revealed a profound bidirectional communication network known as the gut-brain axis. '
           'Trillions of symbiotic microorganisms residing in the human digestive tract produce essential neurotransmitters, such as serotonin and dopamine, '
@@ -29,7 +29,7 @@ class OsymReadingPassages {
     ReadingPassage(
       id: 'passage_science_2',
       title: 'Ocean Acidification and Marine Biodiversity',
-      category: 'ÖSYM Fen Bilimleri',
+      category: 'Dil Sınavı Fen Bilimleri',
       content:
           'Since the commencement of the Industrial Revolution, oceans have absorbed approximately thirty percent of anthropogenic carbon dioxide emissions. '
           'While this colossal absorption has mitigated atmospheric global warming, it has precipitated an unprecedented chemical shift known as ocean acidification. '
@@ -50,7 +50,7 @@ class OsymReadingPassages {
     ReadingPassage(
       id: 'passage_social_3',
       title: 'Urbanization and Social Stratification in Ancient Civilizations',
-      category: 'ÖSYM Sosyal Bilimler',
+      category: 'Dil Sınavı Sosyal Bilimler',
       content:
           'The transition from nomadic foraging to sedentary agriculture fostered the inception of the world’s earliest urban settlements in the fertile valleys of Mesopotamia. '
           'As agricultural innovations generated substantial crop surpluses, societies were no longer constrained by daily subsistence requirements. '

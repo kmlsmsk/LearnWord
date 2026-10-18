@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../data/osym_word_database.dart';
+import '../data/osym_conjunctions_database.dart';
 import '../models/word.dart';
+import '../models/conjunction.dart';
 import '../services/progress_service.dart';
 import '../services/tts_service.dart';
 import '../theme/app_theme.dart';
@@ -51,12 +53,43 @@ class _HomeScreenState extends State<HomeScreen> {
             word: 'mitigate',
             type: WordType.verb,
             level: 'C1',
-            tags: ['YDS'],
+            tags: ['YDS', 'YÖKDİL'],
             meaning: 'hafifletmek, azaltmak',
             root: WordRoot(rootWord: 'mitis', rootMeaning: 'yumuşak', explanation: ''),
             derivatives: [],
             synonyms: ['alleviate'],
             antonyms: ['exacerbate'],
+            examples: [],
+          );
+  }
+
+  Word get _randomRepeatWord {
+    final repeatIds = _progressService.repeatWordIds;
+    if (repeatIds.isNotEmpty) {
+      final match = OsymWordDatabase.words.firstWhere(
+        (w) => repeatIds.contains(w.id),
+        orElse: () => OsymWordDatabase.words.length > 3 ? OsymWordDatabase.words[3] : _wordOfTheDay,
+      );
+      return match;
+    }
+    // If repeat is empty, show a recommended high-frequency word
+    if (OsymWordDatabase.words.length > 10) {
+      return OsymWordDatabase.words[10];
+    }
+    return _wordOfTheDay;
+  }
+
+  Conjunction get _featuredConjunction {
+    return OsymConjunctionsDatabase.conjunctions.isNotEmpty
+        ? OsymConjunctionsDatabase.conjunctions.first
+        : const Conjunction(
+            id: 'conj_although',
+            conjunction: 'although',
+            meaning: '-e rağmen, -se de, karşın',
+            category: 'Zıtlık & Karşıtlık',
+            type: 'Bağlaç',
+            grammarRule: '+ Tam Cümle (S + V) alır.',
+            synonyms: ['even though', 'though'],
             examples: [],
           );
   }
@@ -129,70 +162,78 @@ class _HomeScreenState extends State<HomeScreen> {
       child: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         children: [
-          // Top Header: App Branding + Streak + Settings Icon
+          // Top Header: App Branding + Streak + Settings Icon (Fixed to fit all mobile screens)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image.asset(
-                      'assets/logo.png',
-                      width: 38,
-                      height: 38,
-                      fit: BoxFit.cover,
+              Expanded(
+                child: Row(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.asset(
+                        'assets/logo.png',
+                        width: 38,
+                        height: 38,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 10),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'LearnWord',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                          color: AppTheme.primaryPurple,
-                        ),
+                    const SizedBox(width: 10),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'LearnWord',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w900,
+                              color: AppTheme.primaryPurple,
+                            ),
+                          ),
+                          Text(
+                            'YDS & YÖKDİL Hazırlık',
+                            style: TextStyle(fontSize: 10.5, color: Colors.grey, fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
-                      Text(
-                        'ÖSYM Sınav Hazırlık Platformu',
-                        style: TextStyle(fontSize: 10.5, color: Colors.grey, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   // Streak chip
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 6),
                     decoration: BoxDecoration(
                       color: AppTheme.lightYellow,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(color: AppTheme.accentYellow.withValues(alpha: 0.5)),
                     ),
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text('🔥', style: TextStyle(fontSize: 14)),
+                        const Text('🔥', style: TextStyle(fontSize: 13)),
                         const SizedBox(width: 4),
                         Text(
-                          '$streakDays Gün',
+                          '$streakDays G',
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.brown),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(width: 8),
-                  // Settings Button
+                  const SizedBox(width: 6),
+                  // Settings Button (Never pushed off screen)
                   IconButton.filledTonal(
                     style: IconButton.styleFrom(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(7),
                       minimumSize: const Size(36, 36),
                     ),
                     icon: const Icon(Icons.settings_rounded, size: 20, color: AppTheme.primaryPurple),
+                    tooltip: 'Ayarlar',
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -237,10 +278,21 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          const SizedBox(height: 16),
+          const SizedBox(height: 14),
 
-          // Word of the Day Card
+          // 1. Word of the Day Card
           _buildWordOfTheDayCard(),
+
+          const SizedBox(height: 10),
+
+          // 2. Side-by-side or stacked Cards: Random Repeat Word & Featured Conjunction
+          Row(
+            children: [
+              Expanded(child: _buildRandomRepeatWordCard()),
+              const SizedBox(width: 10),
+              Expanded(child: _buildFeaturedConjunctionCard()),
+            ],
+          ),
 
           const SizedBox(height: 16),
 
@@ -262,7 +314,7 @@ class _HomeScreenState extends State<HomeScreen> {
               // 1. Kelime Havuzu & Flashcard
               _buildBentoCard(
                 title: 'Kelime Havuzu',
-                subtitle: '$totalWords ÖSYM Kelimesi',
+                subtitle: '$totalWords Sınav Kelimesi',
                 icon: Icons.menu_book_rounded,
                 color1: const Color(0xFF6366F1),
                 color2: const Color(0xFF4F46E5),
@@ -273,8 +325,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
               // 2. Bağlaçlar Modülü
               _buildBentoCard(
-                title: 'ÖSYM Bağlaçlar',
-                subtitle: '94 Bağlaç & Flashcard',
+                title: 'Bağlaçlar Rehberi',
+                subtitle: '94+ Bağlaç & Flashcard',
                 icon: Icons.style_rounded,
                 color1: const Color(0xFF0D9488),
                 color2: const Color(0xFF0F766E),
@@ -295,10 +347,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
 
-              // 4. ÖSYM Gramer
+              // 4. Gramer Rehberi
               _buildBentoCard(
-                title: 'ÖSYM Gramer',
-                subtitle: 'Zamanlar, Koşullar, Kısaltmalar',
+                title: 'Gramer Rehberi',
+                subtitle: 'Zamanlar, Koşullar, Cümlecikler',
                 icon: Icons.rule_folder_rounded,
                 color1: const Color(0xFF1E3A8A),
                 color2: const Color(0xFF1E40AF),
@@ -383,7 +435,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'İngilizce Dil & ÖSYM Sınav Uzmanı | Yazılım & UX/UI Mimarı',
+                  'İngilizce Dil & Sınav Uzmanı | Yazılım & UX/UI Mimarı',
                   style: TextStyle(fontSize: 10, color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 12),
@@ -430,6 +482,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // 1. Word of the Day Card
   Widget _buildWordOfTheDayCard() {
     final word = _wordOfTheDay;
 
@@ -461,7 +514,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Text(
-                          '🌟 Günün ÖSYM Kelimesi',
+                          '🌟 Günün Kelimesi',
                           style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.brown),
                         ),
                       ),
@@ -476,6 +529,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     icon: const Icon(Icons.volume_up_rounded, size: 20, color: AppTheme.primaryPurple),
+                    tooltip: 'Seslendir',
                     onPressed: () => _ttsService.speakWord(word.word),
                   ),
                 ],
@@ -489,6 +543,129 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                 word.meaning,
                 style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black87),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 2. Random Repeat Word Card
+  Widget _buildRandomRepeatWordCard() {
+    final word = _randomRepeatWord;
+
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => WordDetailScreen(word: word)),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.orange.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      '🔁 Tekrar',
+                      style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.bold, color: Colors.orange.shade800),
+                    ),
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    icon: Icon(Icons.volume_up_rounded, size: 18, color: Colors.orange.shade800),
+                    onPressed: () => _ttsService.speakWord(word.word),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                word.word,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Colors.orange.shade900),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                word.meaning,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: Colors.black87),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // 3. Featured Conjunction Card
+  Widget _buildFeaturedConjunctionCard() {
+    final conj = _featuredConjunction;
+
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(18),
+        onTap: () {
+          setState(() => _selectedNavIndex = 2);
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF0D9488).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Text(
+                      '🔗 Bağlaç',
+                      style: TextStyle(fontSize: 10.5, fontWeight: FontWeight.bold, color: Color(0xFF0D9488)),
+                    ),
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    icon: const Icon(Icons.volume_up_rounded, size: 18, color: Color(0xFF0D9488)),
+                    onPressed: () => _ttsService.speakWord(conj.conjunction),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                conj.conjunction,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFF0F766E)),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                conj.meaning,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 11.5, fontWeight: FontWeight.w600, color: Colors.black87),
               ),
             ],
           ),

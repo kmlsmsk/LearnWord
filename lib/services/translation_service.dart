@@ -7,7 +7,7 @@ import '../models/word.dart';
 class TranslationResult {
   final String original;
   final String translation;
-  final String source; // 'ÖSYM Sözlüğü' or 'Google Çeviri'
+  final String source; // 'Sınav Sözlüğü' or 'Google Çeviri' or 'Ağ Çevirisi'
   final String? partOfSpeech;
   final List<String> synonyms;
   final String? example;
@@ -48,7 +48,7 @@ class TranslationService {
       return _cache[lower]!;
     }
 
-    // 2. Search local ÖSYM word database (1720+ words)
+    // 2. Search local database (2,000+ words)
     Word? match;
     for (var w in OsymWordDatabase.words) {
       if (w.word.toLowerCase() == singleWordOnly) {
@@ -72,7 +72,7 @@ class TranslationService {
       final res = TranslationResult(
         original: match.word,
         translation: match.meaning,
-        source: 'ÖSYM Sözlüğü',
+        source: 'Sınav Sözlüğü',
         partOfSpeech: match.type.labelTr,
         synonyms: match.synonyms,
         example: match.examples.isNotEmpty ? match.examples.first.english : null,
@@ -81,7 +81,7 @@ class TranslationService {
       return res;
     }
 
-    // 3. Fallback to Google Translate API for words, idioms, or sentences
+    // 3. Google Translate API
     try {
       final translated = await _fetchGoogleTranslate(clean);
       if (translated != null && translated.isNotEmpty) {
@@ -95,10 +95,27 @@ class TranslationService {
         return res;
       }
     } catch (e) {
-      debugPrint("TranslationService Google Translate error: $e");
+      debugPrint("TranslationService Google Translate primary error: $e");
     }
 
-    // 4. Fallback if offline and not in dictionary
+    // 4. Secondary Online Fallback (MyMemory API)
+    try {
+      final myMemoryRes = await _fetchMyMemoryTranslate(clean);
+      if (myMemoryRes != null && myMemoryRes.isNotEmpty) {
+        final res = TranslationResult(
+          original: clean,
+          translation: myMemoryRes,
+          source: 'Ağ Çevirisi',
+          partOfSpeech: clean.contains(' ') ? 'Cümle / İfade' : 'Kelime',
+        );
+        _cache[lower] = res;
+        return res;
+      }
+    } catch (e) {
+      debugPrint("TranslationService MyMemory fallback error: $e");
+    }
+
+    // 5. Fallback if completely offline
     final fallbackRes = TranslationResult(
       original: clean,
       translation: 'Çeviri internet bağlantısı sağlandığında otomatik tamamlanacaktır.',
@@ -109,7 +126,7 @@ class TranslationService {
 
   Future<String?> _fetchGoogleTranslate(String text) async {
     final client = HttpClient();
-    client.connectionTimeout = const Duration(seconds: 5);
+    client.connectionTimeout = const Duration(seconds: 6);
     try {
       final encoded = Uri.encodeComponent(text);
       final url = Uri.parse(
@@ -127,12 +144,86 @@ class TranslationService {
               sb.write(segment[0]);
             }
           }
-          return sb.toString();
+          final res = sb.toString().trim();
+          if (res.isNotEmpty) return res;
         }
       }
       return null;
     } finally {
       client.close();
+    }
+  }
+
+  Future<String?> _fetchMyMemoryTranslate(String text) async {
+    final client = HttpClient();
+    client.connectionTimeout = const Duration(seconds: 6);
+    try {
+      final encoded = Uri.encodeComponent(text);
+      final url = Uri.parse(
+        'https://api.mymemory.translated.net/get?q=$encoded&langpair=en|tr',
+      );
+      final request = await client.getUrl(url);
+      final response = await request.close();
+      if (response.statusCode == 200) {
+        final responseBody = await response.transform(utf8.decoder).join();
+        final dynamic json = jsonDecode(responseBody);
+        if (json is Map && json['responseData'] != null) {
+          final trans = json['responseData']['translatedText'];
+          if (trans is String && trans.isNotEmpty) {
+            return trans.trim();
+          }
+        }
+      }
+      return null;
+    } finally {
+      client.close();
+    }
+  }
+
+  /// Live connection test for Settings screen
+  Future<Map<String, dynamic>> testConnection() async {
+    final stopwatch = Stopwatch()..start();
+    try {
+      final sampleWord = "sustainability";
+      // Clear sample from cache to force live network check
+      _cache.remove(sampleWord);
+
+      // Force network translation test directly
+      String? result = await _fetchGoogleTranslate(sampleWord);
+      String source = "Google Çeviri";
+      if (result == null || result.isEmpty) {
+        result = await _fetchMyMemoryTranslate(sampleWord);
+        source = "MyMemory Çeviri";
+      }
+
+      stopwatch.stop();
+
+      if (result != null && result.isNotEmpty) {
+        return {
+          'success': true,
+          'source': source,
+          'sample': '$sampleWord ➔ $result',
+          'durationMs': stopwatch.elapsedMilliseconds,
+          'message': 'Çeviri sunucusu aktif ve internet bağlantısı çalışıyor!',
+        };
+      } else {
+        return {
+          'success': false,
+          'source': 'Ağ Hatası',
+          'sample': '$sampleWord ➔ Yanıt alınamadı',
+          'durationMs': stopwatch.elapsedMilliseconds,
+          'message': 'Çeviri sunucusuna erişilemedi. Lütfen internet bağlantınızı kontrol edin.',
+        };
+      }
+    } catch (e) {
+      stopwatch.stop();
+      return {
+        'success': false,
+        'source': 'Hata',
+        'sample': '',
+        'durationMs': stopwatch.elapsedMilliseconds,
+        'message': 'Ağ bağlantı hatası: $e',
+      };
     }
   }
 }

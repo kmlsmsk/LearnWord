@@ -38,7 +38,7 @@ class _WordFamilyScreenState extends State<WordFamilyScreen> {
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.primaryPurple.withOpacity(0.3),
+                    color: AppTheme.primaryPurple.withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 6),
                   ),
@@ -69,7 +69,7 @@ class _WordFamilyScreenState extends State<WordFamilyScreen> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'ÖSYM sınavlarında kelimenin kökünü bilmek; fiil, isim, sıfat ve zarf türevlerini saniyeler içinde tanımanızı sağlar.',
+                          'İngilizce dil sınavlarında kelimenin kökünü bilmek; fiil, isim, sıfat ve zarf türevlerini saniyeler içinde tanımanızı sağlar.',
                           style: TextStyle(color: Color(0xFFFEF3C7), fontSize: 12, height: 1.3),
                         ),
                       ],
@@ -82,7 +82,7 @@ class _WordFamilyScreenState extends State<WordFamilyScreen> {
             const SizedBox(height: 20),
 
             const Text(
-              'ÖSYM Temel Kök & Türev Grupları',
+              'Temel Kök & Türev Grupları',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
@@ -173,7 +173,7 @@ class _WordFamilyScreenState extends State<WordFamilyScreen> {
                                 Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                   decoration: BoxDecoration(
-                                    color: badgeColor.withOpacity(0.15),
+                                    color: badgeColor.withValues(alpha: 0.15),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Text(
@@ -248,7 +248,7 @@ class _WordFamilyScreenState extends State<WordFamilyScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.12),
+              color: Colors.grey.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(

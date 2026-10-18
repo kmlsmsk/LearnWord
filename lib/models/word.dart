@@ -132,7 +132,7 @@ class Word {
   final List<String> antonyms;
   final List<ExampleSentence> examples;
   final List<String> collocations;
-  final String? examTip; // ÖSYM ipucu
+  final String? examTip; // Dil Sınavı ipucu
 
   const Word({
     required this.id,

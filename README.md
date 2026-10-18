@@ -12,7 +12,7 @@
   <img src="https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter" alt="Flutter" />
   <img src="https://img.shields.io/badge/Dart-3.x-0175C2?logo=dart" alt="Dart" />
   <img src="https://img.shields.io/badge/Platform-Android-3DDC84?logo=android" alt="Android" />
-  <img src="https://img.shields.io/badge/Kelime%20Sayısı-1720+-4CAF50" alt="Word Count" />
+  <img src="https://img.shields.io/badge/Kelime%20Sayısı-2000+-4CAF50" alt="Word Count" />
   <img src="https://img.shields.io/badge/Bağlaç%20Sayısı-94-009688" alt="Conjunctions" />
 </p>
 
@@ -20,24 +20,24 @@
 
 ## 👨‍💻 Geliştirici & Tasarım
 **Geliştirici & Tasarım:** **Kemal ŞİMŞEK**  
-*İngilizce Dil & Dil Sınav Uzmanı | Yazılım & UX/UI Mimarı*
+*İngilizce Dil & Sınav Uzmanı | Yazılım & UX/UI Mimarı*
 
 ---
 
 ## ✨ Öne Çıkan Özellikler ve Modüller
 
-### 1. 📚 1.720+ Çıkmış Kelime Veritabanı
-- Son 15 yılın YDS, e-YDS ve YÖKDİL (Sağlık, Sosyal, Fen) sınav sorularından ve kaynaklarından derlenmiş **1.720 kelimelik eksiksiz veritabanı**.
-- **Kategori & Seviye:** Fiil (Verb), İsim (Noun), Sıfat (Adjective), Zarf (Adverb), Edat (Preposition); B2/C1 sınav seviyeleri.
+### 1. 📚 2.000+ Çıkmış Kelime Veritabanı
+- Son 15 yılın YDS, e-YDS ve YÖKDİL (Sağlık, Sosyal, Fen) sınav sorularından ve akademik literatürden derlenmiş **2.000'i aşkın zengin kelime veritabanı**.
+- **Kategori & Seviye:** Fiil (Verb), İsim (Noun), Sıfat (Adjective), Zarf (Adverb), Deyimsel Fiil (Phrasal Verb); B2/C1 sınav seviyeleri.
 - **İngilizce Fonetik Telaffuz & TTS:** Kelimeler native Amerikan / İngiliz İngilizcesi (`en-US` / `en-GB`) aksanıyla seslendirilir.
 - **Kelime Kökü (Etymology):** Latince, Grekçe veya Eski Fransızca köken analizi ve akılda kalıcı morfolojik mantık.
 - **Türev Kelimeler Ailesi:** Kökten türeyen isim, fiil, sıfat ve zarf biçimleri Türkçe anlamlarıyla tablo halinde sunulur.
 - **Zengin Eş & Zıt Anlamlar:** Dil sınavlarının soru köklerinde ve çeldiricilerinde kullandığı tüm kritik eş ve zıt anlamlar.
 - **Akademik Cümleler ve Çevirileri:** Çıkmış soru formatında örnek cümleler ve Türkçe çevirileri.
 
-### 2. 🎴 ÖSYM Bağlaçlar Modülü (Flashcard & Liste Modu)
+### 2. 🎴 Bağlaçlar Modülü (Flashcard & Liste Modu)
 - YDS ve YÖKDİL'in belkemiği olan **94 kritik bağlaç ve geçiş ifadesi**.
-- **3D Çevrilebilir Flashcard Kart Modu:** Kartın ön yüzünde bağlaç, `+ S+V` veya `+ Noun / Ving` gramer rozeti, kategori ve seslendirme; arka yüzünde Türkçe anlamı, eş anlamlılar, sınav püf noktaları ve Türkçe çevirili örnek cümle.
+- **3D Çevrilebilir Tam Ekran Flashcard Kart Modu:** Kartın ön yüzünde bağlaç, `+ S+V` veya `+ Noun / Ving` gramer rozeti, kategori ve seslendirme; arka yüzünde Türkçe anlamı, eş anlamlılar, sınav püf noktaları ve Türkçe çevirili örnek cümle.
 - **Gramer Kuralı Rozetleri:** `+ S+V` (Cümle alanlar) ve `+ Noun / Ving` (İsim/İsim öbeği alanlar) ayrımı renk kodlu olarak vurgulanır.
 - **Sınav Püf Noktaları:** Virgülden sonra gelip gelmeme, cümle başı kısıtları ve soru yakalama taktikleri.
 

@@ -1,7 +1,7 @@
 class ReadingPassage {
   final String id;
   final String title;
-  final String category; // "ÖSYM Fen", "ÖSYM Sağlık", "ÖSYM Sosyal", "Kendi Metnim"
+  final String category; // "Dil Sınavı Fen", "Dil Sınavı Sağlık", "Dil Sınavı Sosyal", "Kendi Metnim"
   final String content;
   final String turkishTranslation;
   final List<String> keyWords;

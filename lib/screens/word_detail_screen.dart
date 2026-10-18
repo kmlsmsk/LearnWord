@@ -73,7 +73,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.primaryPurple.withOpacity(0.35),
+                    color: AppTheme.primaryPurple.withValues(alpha: 0.35),
                     blurRadius: 18,
                     offset: const Offset(0, 8),
                   ),
@@ -102,7 +102,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                       ),
                       IconButton.filled(
                         style: IconButton.styleFrom(
-                          backgroundColor: Colors.white.withOpacity(0.25),
+                          backgroundColor: Colors.white.withValues(alpha: 0.25),
                         ),
                         icon: const Icon(Icons.volume_up_rounded, color: Colors.white, size: 26),
                         onPressed: () => _ttsService.speak(word.word),
@@ -133,7 +133,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                     Text(
                       word.detailedMeaning!,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.85),
+                        color: Colors.white.withValues(alpha: 0.85),
                         fontSize: 13,
                       ),
                     ),
@@ -147,7 +147,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                           (tag) => Container(
                             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.18),
+                              color: Colors.white.withValues(alpha: 0.18),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -179,7 +179,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                         decoration: BoxDecoration(
                           color: AppTheme.lightYellow,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: AppTheme.accentYellow.withOpacity(0.5)),
+                          border: Border.all(color: AppTheme.accentYellow.withValues(alpha: 0.5)),
                         ),
                         child: Text(
                           'Kök: ${word.root.rootWord}',
@@ -218,10 +218,10 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withOpacity(0.04)
+                          ? Colors.white.withValues(alpha: 0.04)
                           : const Color(0xFFF1F5F9),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.black.withOpacity(0.05)),
+                      border: Border.all(color: Colors.black.withValues(alpha: 0.05)),
                     ),
                     child: Row(
                       children: [
@@ -248,7 +248,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                                   Container(
                                     padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                                     decoration: BoxDecoration(
-                                      color: Colors.blueGrey.withOpacity(0.15),
+                                      color: Colors.blueGrey.withValues(alpha: 0.15),
                                       borderRadius: BorderRadius.circular(6),
                                     ),
                                     child: Text(
@@ -295,9 +295,9 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                             decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(0.1),
+                              color: Colors.blue.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                              border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -333,9 +333,9 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                           child: Container(
                             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                             decoration: BoxDecoration(
-                              color: Colors.redAccent.withOpacity(0.1),
+                              color: Colors.redAccent.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.redAccent.withOpacity(0.3)),
+                              border: Border.all(color: Colors.redAccent.withValues(alpha: 0.3)),
                             ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
@@ -361,7 +361,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
 
             // Örnek Cümleler (Examples)
             _buildSectionCard(
-              title: 'ÖSYM Örnek Cümleleri ve Çevirisi',
+              title: 'Örnek Cümleler ve Çevirisi',
               icon: Icons.format_quote_rounded,
               iconColor: Colors.amber.shade800,
               child: Column(
@@ -371,10 +371,10 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white.withOpacity(0.04)
+                          ? Colors.white.withValues(alpha: 0.04)
                           : const Color(0xFFF8FAFC),
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.amber.withOpacity(0.2)),
+                      border: Border.all(color: Colors.amber.withValues(alpha: 0.2)),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -413,7 +413,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
 
             if (word.examTip != null) ...[
               const SizedBox(height: 16),
-              // ÖSYM Uzman Tüyosu
+              // Uzman Sınav Tüyosu
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -431,7 +431,7 @@ class _WordDetailScreenState extends State<WordDetailScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'ÖSYM Sınav Tüyosu (YDS & YÖKDİL)',
+                            'Sınav Tüyosu (YDS & YÖKDİL)',
                             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.brown),
                           ),
                           const SizedBox(height: 4),

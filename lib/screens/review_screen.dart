@@ -66,7 +66,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.amber.withOpacity(0.3),
+                          color: Colors.amber.withValues(alpha: 0.3),
                           blurRadius: 12,
                           offset: const Offset(0, 6),
                         ),
@@ -80,7 +80,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                             Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.25),
+                                color: Colors.white.withValues(alpha: 0.25),
                                 shape: BoxShape.circle,
                               ),
                               child: const Icon(Icons.refresh_rounded, color: Colors.white, size: 28),
@@ -210,7 +210,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                                   child: Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: AppTheme.primaryPurple.withOpacity(0.12),
+                                      color: AppTheme.primaryPurple.withValues(alpha: 0.12),
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Icon(Icons.volume_up_rounded, color: AppTheme.primaryPurple, size: 22),

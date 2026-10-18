@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/tts_service.dart';
 import '../services/progress_service.dart';
+import '../services/translation_service.dart';
 import '../theme/app_theme.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -13,12 +14,14 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final TtsService _ttsService = TtsService();
   final ProgressService _progressService = ProgressService();
+  final TranslationService _translationService = TranslationService();
 
   double _speechRate = 0.5;
   double _pitch = 1.0;
   String _selectedAccent = 'en-US';
-  String _translationProvider = 'Google Çeviri + ÖSYM Sözlüğü';
+  String _translationProvider = 'Google Çeviri + Sınav Sözlüğü';
   String _readerFontSize = 'Normal';
+  bool _isTestingTranslation = false;
 
   final List<Map<String, String>> _accents = [
     {'code': 'en-US', 'name': 'Amerikan İngilizcesi (en-US)'},
@@ -114,7 +117,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       icon: const Icon(Icons.volume_up, size: 18),
                       label: const Text('Test Sesini Dinle'),
                       onPressed: () {
-                        _ttsService.speakEnglish("Welcome to LearnWord. Master your ÖSYM vocabulary efficiently.");
+                        _ttsService.speakEnglish("Welcome to LearnWord. Master your academic vocabulary efficiently.");
                       },
                     ),
                   ),
@@ -144,12 +147,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     items: const [
                       DropdownMenuItem(
-                        value: 'Google Çeviri + ÖSYM Sözlüğü',
-                        child: Text('Google Çeviri + ÖSYM Sözlüğü (Akıllı)', style: TextStyle(fontSize: 13)),
+                        value: 'Google Çeviri + Sınav Sözlüğü',
+                        child: Text('Google Çeviri + Sınav Sözlüğü (Akıllı Hibrit)', style: TextStyle(fontSize: 13)),
                       ),
                       DropdownMenuItem(
-                        value: 'Yalnızca Çevrimdışı ÖSYM Sözlüğü',
-                        child: Text('Yalnızca Çevrimdışı ÖSYM Sözlüğü', style: TextStyle(fontSize: 13)),
+                        value: 'Yalnızca Çevrimdışı Sınav Sözlüğü',
+                        child: Text('Yalnızca Çevrimdışı Sözlük Havuzu (2000+ Kelime)', style: TextStyle(fontSize: 13)),
                       ),
                     ],
                     onChanged: (val) {
@@ -160,6 +163,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ),
 
                   const SizedBox(height: 14),
+
+                  // Live Network Translation Test Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0284C7),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                      icon: _isTestingTranslation
+                          ? const SizedBox(
+                              width: 18,
+                              height: 18,
+                              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                            )
+                          : const Icon(Icons.network_check_rounded, size: 20),
+                      label: Text(
+                        _isTestingTranslation ? 'Bağlantı Kontrol Ediliyor...' : 'Google Çeviri Bağlantısını Test Et',
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                      ),
+                      onPressed: _isTestingTranslation ? null : _testTranslationConnection,
+                    ),
+                  ),
+
+                  const SizedBox(height: 16),
 
                   const Text('Okuma Metni Yazı Boyutu:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
                   const SizedBox(height: 6),
@@ -221,7 +251,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'İngilizce Dil & ÖSYM Sınav Uzmanı | Yazılım & UX/UI Mimarı',
+                  'İngilizce Dil & Sınav Uzmanı | Yazılım & UX/UI Mimarı',
                   style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
                 ),
                 const SizedBox(height: 20),
@@ -249,6 +279,90 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  void _testTranslationConnection() async {
+    setState(() => _isTestingTranslation = true);
+    final result = await _translationService.testConnection();
+    if (!mounted) return;
+    setState(() => _isTestingTranslation = false);
+
+    final bool isSuccess = result['success'] == true;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            Icon(
+              isSuccess ? Icons.check_circle_rounded : Icons.error_outline_rounded,
+              color: isSuccess ? Colors.green : Colors.redAccent,
+              size: 26,
+            ),
+            const SizedBox(width: 10),
+            Text(isSuccess ? 'Bağlantı Başarılı' : 'Bağlantı Hatası'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              result['message']?.toString() ?? '',
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: isSuccess ? Colors.green.shade50 : Colors.red.shade50,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: isSuccess ? Colors.green.shade200 : Colors.red.shade200,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Motor: ${result['source']}',
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold,
+                          color: isSuccess ? Colors.green.shade800 : Colors.red.shade800,
+                        ),
+                      ),
+                      Text(
+                        '${result['durationMs']} ms',
+                        style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'Örnek Test: ${result['sample']}',
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: isSuccess ? AppTheme.primaryPurple : Colors.grey.shade700,
+            ),
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Tamam', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _confirmResetRepeatList(BuildContext context) {
     showDialog(
       context: context,
@@ -263,16 +377,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
             onPressed: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              final nav = Navigator.of(ctx);
               for (var id in _progressService.repeatWordIds.toList()) {
                 await _progressService.removeFromRepeat(id);
               }
               if (mounted) {
                 setState(() {});
-                ScaffoldMessenger.of(context).showSnackBar(
+                messenger.showSnackBar(
                   const SnackBar(content: Text('Tekrar listesi sıfırlandı.')),
                 );
               }
-              if (ctx.mounted) Navigator.pop(ctx);
+              nav.pop();
             },
             child: const Text('Sıfırla', style: TextStyle(color: Colors.white)),
           ),

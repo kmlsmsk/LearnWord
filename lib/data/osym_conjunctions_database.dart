@@ -35,7 +35,7 @@ class OsymConjunctionsDatabase {
           turkish: 'Klinik deney küçük bir hasta grubunu içermesine rağmen, ön bulgular oldukça umut vericiydi.',
         ),
       ],
-      examTip: 'ÖSYM cümle tamamlama sorularında zıtlık bildiren ana cümle ile yan cümle arasındaki köprüdür.',
+      examTip: 'Cümle tamamlama sorularında zıtlık bildiren ana cümle ile yan cümle arasındaki köprüdür.',
     ),
 
     Conjunction(
@@ -86,7 +86,7 @@ class OsymConjunctionsDatabase {
           turkish: 'Yeni politika bölgesel emisyonları azaltmayı hedeflemektedir; ancak uygulama maliyetleri kayda değer kalmaktadır.',
         ),
       ],
-      examTip: 'Sıfat/Zarf ile kullanımı: "However difficult the exam is, you can pass." (Ne kadar zor olursa olsun...). Bu kalıp ÖSYM\'nin en sevdiği tuzaklardandır!',
+      examTip: 'Sıfat/Zarf ile kullanımı: "However difficult the exam is, you can pass." (Ne kadar zor olursa olsun...). Bu kalıp Dil Sınavı\'nin en sevdiği tuzaklardandır!',
     ),
 
     Conjunction(
@@ -120,7 +120,7 @@ class OsymConjunctionsDatabase {
           turkish: 'Gelişmiş ekonomiler demografik yaşlanmayla karşı karşıya iken, birçok Afrika ülkesi ağırlıklı olarak genç nüfusa sahiptir.',
         ),
       ],
-      examTip: 'ÖSYM iki farklı grup (zengin/fakir, kadın/erkek, geçmiş/günümüz) karşılaştırıldığında doğru cevap olarak "whereas" veya "while" seçtirir.',
+      examTip: 'Dil Sınavı iki farklı grup (zengin/fakir, kadın/erkek, geçmiş/günümüz) karşılaştırıldığında doğru cevap olarak "whereas" veya "while" seçtirir.',
     ),
 
     Conjunction(
@@ -189,7 +189,7 @@ class OsymConjunctionsDatabase {
           turkish: 'Çita, gizlilik yerine üstün hızlanmasına dayanması yönüyle (çünkü öyle olduğundan) büyük kediler arasında eşsizdir.',
         ),
       ],
-      examTip: 'Cümle başında pek kullanılmaz; iki cümle arasında "çünkü / şu bakımdan ki" anlamında ÖSYM\'nin en seçkin bağlaçlarındandır.',
+      examTip: 'Cümle başında pek kullanılmaz; iki cümle arasında "çünkü / şu bakımdan ki" anlamında Dil Sınavı\'nin en seçkin bağlaçlarındandır.',
     ),
 
     Conjunction(
@@ -257,7 +257,7 @@ class OsymConjunctionsDatabase {
           turkish: 'Hibrit motor frenleme sırasında enerjiyi geri kazanır, böylece yakıt verimliliğini önemli ölçüde artırır.',
         ),
       ],
-      examTip: 'Arkasına doğrudan fiilin "-ing" hali (Ving) gelmesi ÖSYM sorularında en belirleyici ipucudur.',
+      examTip: 'Arkasına doğrudan fiilin "-ing" hali (Ving) gelmesi Sınav sorularında en belirleyici ipucudur.',
     ),
 
     // ---------------- 3. KOŞUL & ŞART (CONDITION) ----------------

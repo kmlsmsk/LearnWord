@@ -210,24 +210,27 @@ class _ReadingPassageDetailScreenState extends State<ReadingPassageDetailScreen>
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    '🇹🇷 Türkçe Anlamı:',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.brown),
+                                  const Flexible(
+                                    child: Text(
+                                      '🇹🇷 Türkçe Anlamı:',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.brown),
+                                    ),
                                   ),
+                                  const SizedBox(width: 8),
                                   Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                                     decoration: BoxDecoration(
-                                      color: result?.source == 'ÖSYM Sözlüğü'
+                                      color: result?.source == 'Sınav Sözlüğü'
                                           ? Colors.green.shade100
                                           : Colors.blue.shade100,
-                                      borderRadius: BorderRadius.circular(6),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Text(
                                       result?.source ?? '',
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
-                                        color: result?.source == 'ÖSYM Sözlüğü'
+                                        color: result?.source == 'Sınav Sözlüğü'
                                             ? Colors.green.shade800
                                             : Colors.blue.shade800,
                                       ),
@@ -464,7 +467,7 @@ class _ReadingPassageDetailScreenState extends State<ReadingPassageDetailScreen>
                         SizedBox(width: 8),
                         Expanded(
                           child: Text(
-                            'İpucu: Kelimeye dokunarak anında Türkçe çevirisini (ÖSYM & Google Çeviri) görün.',
+                            'İpucu: Kelimeye dokunarak anında Türkçe çevirisini (Sözlük & Google Çeviri) görün.',
                             style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: Colors.grey),
                           ),
                         ),

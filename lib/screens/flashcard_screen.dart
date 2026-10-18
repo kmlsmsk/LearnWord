@@ -215,7 +215,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
-                          color: isLearned ? Colors.green.withOpacity(0.15) : Colors.orange.withOpacity(0.15),
+                          color: isLearned ? Colors.green.withValues(alpha: 0.15) : Colors.orange.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
@@ -274,58 +274,69 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
               ),
             ),
 
-            // Bottom Action Controls
+            // Bottom Action Controls with responsive icon buttons
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Önceki Kelime Button
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new_rounded),
+                  IconButton.filledTonal(
+                    style: IconButton.styleFrom(
+                      padding: const EdgeInsets.all(12),
+                    ),
+                    icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
                     onPressed: _currentIndex > 0 ? _previousWord : null,
                     tooltip: 'Önceki Kelime',
                   ),
-                  const SizedBox(width: 4),
-                  // Tekrar Et (Repeat) Button
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.orange.shade800,
-                        side: BorderSide(color: Colors.orange.shade400, width: 1.5),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      ),
-                      icon: const Icon(Icons.refresh_rounded),
-                      label: const Text('Tekrar Et', style: TextStyle(fontWeight: FontWeight.bold)),
-                      onPressed: () => _nextWord(false),
+
+                  // Tekrar Et (Repeat) Icon Button
+                  IconButton.filled(
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.orange.shade700,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.all(14),
+                      elevation: 2,
                     ),
+                    icon: const Icon(Icons.replay_rounded, size: 26),
+                    tooltip: 'Tekrar Et',
+                    onPressed: () => _nextWord(false),
                   ),
-                  const SizedBox(width: 8),
+
                   // Seslendir (Audio) Button
                   IconButton.filled(
                     style: IconButton.styleFrom(
                       backgroundColor: AppTheme.accentYellow,
                       foregroundColor: Colors.black87,
-                      padding: const EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(16),
+                      elevation: 3,
                     ),
                     icon: const Icon(Icons.volume_up_rounded, size: 28),
+                    tooltip: 'Telaffuz',
                     onPressed: () => _ttsService.speak(currentWord.word),
                   ),
-                  const SizedBox(width: 8),
-                  // Öğrendim (Learned) Button
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.successGreen,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      ),
-                      icon: const Icon(Icons.check_circle_rounded),
-                      label: const Text('Öğrendim', style: TextStyle(fontWeight: FontWeight.bold)),
-                      onPressed: () => _nextWord(true),
+
+                  // Öğrendim (Learned) Icon Button
+                  IconButton.filled(
+                    style: IconButton.styleFrom(
+                      backgroundColor: AppTheme.successGreen,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.all(14),
+                      elevation: 2,
                     ),
+                    icon: const Icon(Icons.check_circle_rounded, size: 26),
+                    tooltip: 'Öğrendim',
+                    onPressed: () => _nextWord(true),
+                  ),
+
+                  // Sonraki Kelime Button
+                  IconButton.filledTonal(
+                    style: IconButton.styleFrom(
+                      padding: const EdgeInsets.all(12),
+                    ),
+                    icon: const Icon(Icons.arrow_forward_ios_rounded, size: 20),
+                    onPressed: _currentIndex < _studyList.length - 1 ? () => _nextWord(true) : null,
+                    tooltip: 'Sonraki Kelime',
                   ),
                 ],
               ),
@@ -345,13 +356,13 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primaryPurple.withOpacity(0.15),
+            color: AppTheme.primaryPurple.withValues(alpha: 0.15),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
         ],
         border: Border.all(
-          color: AppTheme.primaryPurple.withOpacity(0.2),
+          color: AppTheme.primaryPurple.withValues(alpha: 0.2),
           width: 2,
         ),
       ),
@@ -403,7 +414,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
-                color: AppTheme.primaryPurple.withOpacity(0.1),
+                color: AppTheme.primaryPurple.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: const Row(
@@ -420,11 +431,11 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
             ),
           ),
           const Spacer(),
-          // Root clue on front
+          // Root clue on front (non-overflowing)
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.08),
+              color: Colors.grey.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -432,9 +443,16 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
               children: [
                 const Icon(Icons.account_tree_outlined, size: 16, color: Colors.grey),
                 const SizedBox(width: 6),
-                Text(
-                  'Kök: ${word.root.rootWord} (${word.root.rootMeaning})',
-                  style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                Flexible(
+                  child: Text(
+                    word.root.rootMeaning.isNotEmpty
+                        ? 'Kök: ${word.root.rootWord} (${word.root.rootMeaning})'
+                        : 'Kök: ${word.root.rootWord}',
+                    style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ],
             ),
@@ -466,7 +484,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> with SingleTickerProv
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.accentYellow.withOpacity(0.25),
+            color: AppTheme.accentYellow.withValues(alpha: 0.25),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),

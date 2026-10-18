@@ -81,7 +81,7 @@ class _WordListScreenState extends State<WordListScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ÖSYM Kelime Havuzu'),
+        title: const Text('Kelime Havuzu'),
       ),
       body: Column(
         children: [
@@ -245,7 +245,7 @@ class _WordListScreenState extends State<WordListScreen> {
                                   child: Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: AppTheme.primaryPurple.withOpacity(0.1),
+                                      color: AppTheme.primaryPurple.withValues(alpha: 0.1),
                                       shape: BoxShape.circle,
                                     ),
                                     child: const Icon(

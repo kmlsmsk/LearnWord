@@ -229,7 +229,7 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget build(BuildContext context) {
     if (_questions.isEmpty) {
       return Scaffold(
-        appBar: AppBar(title: const Text('ÖSYM Sınav Pratiği')),
+        appBar: AppBar(title: const Text('Sınav Pratiği')),
         body: const Center(child: Text('Soru oluşturulamadı.')),
       );
     }
@@ -238,7 +238,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ÖSYM Sınav Modu'),
+        title: const Text('Sınav Simülatörü'),
       ),
       body: SafeArea(
         child: Padding(
@@ -294,7 +294,7 @@ class _QuizScreenState extends State<QuizScreen> {
                           children: [
                             IconButton.filled(
                               style: IconButton.styleFrom(
-                                backgroundColor: AppTheme.primaryPurple.withOpacity(0.12),
+                                backgroundColor: AppTheme.primaryPurple.withValues(alpha: 0.12),
                                 foregroundColor: AppTheme.primaryPurple,
                               ),
                               icon: const Icon(Icons.volume_up_rounded),
@@ -337,11 +337,11 @@ class _QuizScreenState extends State<QuizScreen> {
 
                     if (_hasAnswered) {
                       if (idx == q.correctIndex) {
-                        cardColor = AppTheme.successGreen.withOpacity(0.15);
+                        cardColor = AppTheme.successGreen.withValues(alpha: 0.15);
                         borderColor = AppTheme.successGreen;
                         textColor = AppTheme.successGreen;
                       } else if (idx == _selectedOptionIndex) {
-                        cardColor = AppTheme.errorRed.withOpacity(0.15);
+                        cardColor = AppTheme.errorRed.withValues(alpha: 0.15);
                         borderColor = AppTheme.errorRed;
                         textColor = AppTheme.errorRed;
                       }
@@ -366,7 +366,7 @@ class _QuizScreenState extends State<QuizScreen> {
                                 height: 32,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  color: Colors.grey.withOpacity(0.12),
+                                  color: Colors.grey.withValues(alpha: 0.12),
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(

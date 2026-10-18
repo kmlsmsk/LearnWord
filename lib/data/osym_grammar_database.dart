@@ -11,9 +11,9 @@ class OsymGrammarDatabase {
       titleTr: 'Yakın Geçmiş Zaman & Since / For Kuralı',
       category: 'Zamanlar (Tenses)',
       formula: 'S + have / has + V3',
-      explanation: 'Geçmişte başlayıp günümüzde devam eden veya etkisi süren eylemleri ifade eder. ÖSYM sınavlarının en çok test edilen zaman yapısıdır. "Recently, lately, so far, up to now, over the last/past 10 years, in recent decades" gibi zaman zarflarıyla zorunlu olarak kullanılır.',
+      explanation: 'Geçmişte başlayıp günümüzde devam eden veya etkisi süren eylemleri ifade eder. Dil Sınavı sınavlarının en çok test edilen zaman yapısıdır. "Recently, lately, so far, up to now, over the last/past 10 years, in recent decades" gibi zaman zarflarıyla zorunlu olarak kullanılır.',
       osymTips: [
-        '📌 "Since + Past Simple (V2), Main Clause = Present Perfect (have/has V3)" kuralı ÖSYM\'nin en sevdiği ve hemen her sınavda sorduğu altın kuraldır.',
+        '📌 "Since + Past Simple (V2), Main Clause = Present Perfect (have/has V3)" kuralı Dil Sınavı\'nin en sevdiği ve hemen her sınavda sorduğu altın kuraldır.',
         '📌 "Over / In / During the last/past decade/century" kalıbı doğrudan "have/has V3" gerektirir.',
         '📌 Cümlede net bir geçmiş zaman belirteci (in 1995, ago, yesterday, during the Ottoman era) varsa KESİNLİKLE Present Perfect DEĞİL, Past Simple (V2) seçilmelidir.',
       ],
@@ -41,7 +41,7 @@ class OsymGrammarDatabase {
       formula: 'S + had + V3',
       explanation: 'Geçmişte gerçekleşen iki olaydan daha önce meydana geleni ifade eder. Tek başına bağımsız bir cümlede gerekçesiz yere kullanılmaz; mutlaka geçmişte başka bir referans noktası (Past Simple) bulunmalıdır.',
       osymTips: [
-        '📌 By the time + Past Simple (V2), S + had + V3 (ÖSYM\'nin klasik şablonu).',
+        '📌 By the time + Past Simple (V2), S + had + V3 (Dil Sınavı\'nin klasik şablonu).',
         '📌 "Before" bağlacının bağlı olduğu cümle V2 iken diğer taraf had V3 olur. "After"ın bağlı olduğu cümle ise had V3 olur.',
         '📌 "No sooner ... than" ve "Hardly / Scarcely ... when" kalıplarında devrik Past Perfect kullanılır: "Hardly had the meeting started when the power went out."',
       ],
@@ -122,7 +122,7 @@ class OsymGrammarDatabase {
       titleTr: 'If Olmadan Devrik Şart Cümleleri',
       category: 'Koşul Cümleleri (Conditionals)',
       formula: 'Type 1: Should S + V1 | Type 2: Were S + to V1 / Were S | Type 3: Had S + V3',
-      explanation: 'Akademik dilde "If" kelimesi atılarak cümle devrik (soru cümlesi dizilimi) yapılır. ÖSYM bu yapıları paragraf ve cümle tamamlama sorularında sıkça tercih eder.',
+      explanation: 'Akademik dilde "If" kelimesi atılarak cümle devrik (soru cümlesi dizilimi) yapılır. Dil Sınavı bu yapıları paragraf ve cümle tamamlama sorularında sıkça tercih eder.',
       osymTips: [
         '📌 "Had the patient arrived earlier, she would have survived." -> (If the patient had arrived earlier demektir).',
         '📌 "Should you encounter any difficulty, contact our team." -> (If you encounter demektir).',
@@ -146,7 +146,7 @@ class OsymGrammarDatabase {
       titleTr: 'Sıfat Cümlecikleri ve Preposition + Relative Pronoun',
       category: 'Sıfat Cümlecikleri (Relative Clauses)',
       formula: 'İsim + [who / which / that / whose / where / preposition + which]',
-      explanation: 'Bir ismi niteleyip onun hakkında detaylı bilgi veren yan cümlelerdir. ÖSYM özellikle virgülden sonra "that" GELMEYECEĞİNİ ve edatlardan sonra sadece "which" (nesneler) veya "whom" (insanlar) gelebileceğini test eder.',
+      explanation: 'Bir ismi niteleyip onun hakkında detaylı bilgi veren yan cümlelerdir. Dil Sınavı özellikle virgülden sonra "that" GELMEYECEĞİNİ ve edatlardan sonra sadece "which" (nesneler) veya "whom" (insanlar) gelebileceğini test eder.',
       osymTips: [
         '📌 Virgülden sonra (Non-defining) ve edattan sonra (in, on, at, with) ASLA "that" KULLANILMAZ!',
         '📌 "Whose + Tam Noun": Whose kelimesinden sonra mutlaka eksiz ve tanımsız bir isim gelmelidir (whose father, whose symptoms).',
@@ -205,7 +205,7 @@ class OsymGrammarDatabase {
       titleTr: 'Fiilimsi ve Cümlecik Kısaltmaları',
       category: 'Kısaltmalar (Reductions)',
       formula: 'Aktif: Ving / Having V3 | Pasif: V3 / Having been V3 | To-infinitive: to V1 / to have V3',
-      explanation: 'Özneleri ortak olan sıfat ve zarf cümleciklerinin daha akıcı bir akademik anlatım için kısaltılmasıdır. ÖSYM sorularında en çok soru gelen ileri düzey konudur.',
+      explanation: 'Özneleri ortak olan sıfat ve zarf cümleciklerinin daha akıcı bir akademik anlatım için kısaltılmasıdır. Sınav sorularında en çok soru gelen ileri düzey konudur.',
       osymTips: [
         '📌 Cümle başındaki boşlukta: Virgülden sonraki özne eylemi YAPIYORSA -> Ving / Having V3 (Aktif).',
         '📌 Virgülden sonraki özne eylemden ETKİLENİYORSA -> V3 / Having been V3 (Pasif).',
