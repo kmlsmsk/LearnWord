@@ -9,10 +9,15 @@ class OsymWordDatabase {
 
   static Future<void> init() async {
     try {
-      final jsonStr = await rootBundle.loadString('assets/data/osym_words.json');
+      String jsonStr;
+      try {
+        jsonStr = await rootBundle.loadString('assets/data/osym_words.json');
+      } catch (_) {
+        jsonStr = await rootBundle.loadString('assets/osym_words.json');
+      }
       final List<dynamic> jsonList = jsonDecode(jsonStr);
       _loadedWords = jsonList.map((j) => Word.fromJson(j)).toList();
-      debugPrint("OsymWordDatabase: Successfully loaded ${_loadedWords.length} words from JSON.");
+      debugPrint("OsymWordDatabase: Successfully loaded ${_loadedWords.length} words.");
     } catch (e) {
       debugPrint("OsymWordDatabase: Error loading JSON: $e");
       _loadedWords = List.from(_coreWords);

@@ -92,6 +92,23 @@ class TtsService {
     }
   }
 
+  Future<void> speakWord(String word) async => speak(word);
+
+  Future<void> speakEnglish(String text) async => speak(text);
+
+  Future<void> setSpeechRate(double rate) async {
+    try {
+      await _flutterTts?.setSpeechRate(rate);
+    } catch (_) {}
+  }
+
+  Future<void> setLanguage(String lang) async {
+    try {
+      _currentLanguage = lang;
+      await _flutterTts?.setLanguage(lang);
+    } catch (_) {}
+  }
+
   Future<void> stop() async {
     try {
       await _flutterTts?.stop();
